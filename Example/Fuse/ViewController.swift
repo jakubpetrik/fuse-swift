@@ -94,9 +94,9 @@ class ViewController: UITableViewController {
     }
     
     func filterContentForSearchText(_ searchText: String) {
-        let boldAttrs = [
-            NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17),
-            NSForegroundColorAttributeName: UIColor.blue
+        let boldAttrs: [NSAttributedStringKey: Any] = [
+            .font : UIFont.boldSystemFont(ofSize: 17),
+            .foregroundColor: UIColor.blue
         ]
 
         let results = fuse.search(searchText, in: books)
@@ -106,7 +106,6 @@ class ViewController: UITableViewController {
 
             let attributedString = NSMutableAttributedString(string: book)
             matchedRanges
-                .map(Range.init)
                 .map(NSRange.init)
                 .forEach {
                     attributedString.addAttributes(boldAttrs, range: $0)
